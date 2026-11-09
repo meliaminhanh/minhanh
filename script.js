@@ -1,0 +1,13 @@
+(() => {
+const button=document.querySelector(".menu-toggle"),nav=document.querySelector("#main-nav");
+if(button&&nav){button.addEventListener("click",()=>{const open=nav.classList.toggle("is-open");button.setAttribute("aria-expanded",String(open));button.setAttribute("aria-label",open?"Stäng menyn":"Öppna menyn")});nav.querySelectorAll("a").forEach(a=>a.addEventListener("click",()=>{nav.classList.remove("is-open");button.setAttribute("aria-expanded","false");button.setAttribute("aria-label","Öppna menyn")}))}
+const year=document.querySelector("#year");if(year)year.textContent=new Date().getFullYear();
+const data={
+plocky:["01 / UI DESIGN","Express Matvaruapp","Ett koncept för en snabb och smidig matinköpsupplevelse. Jag designade en mobilapp där användaren enkelt kan hitta sina favoritvaror, upptäcka erbjudanden och handla mat på språng.",["UI-design","Mobilapp","Figma","Design system"]],
+cancer:["02 / UX RESEARCH","Cancerdagbok","Ett UX-researchprojekt där vi undersökte cancerpatienters behov och utmaningar för att utforska hur digitalt stöd kan underlätta vardagen under behandling.",["UX-research","Behovsanalys","Intervju"]],
+viking:["03 / ETISK DESIGN","The Viking Museum","Ett quizbaserat spelkoncept för The Viking Museum, riktat mot barnfamiljer, med målet att göra vikingatiden mer engagerande och lärorik.",["Etisk design","User Flow","Spelkoncept","Barn & unga","Digital upplevelse"]],
+steam:["04 / TILLGÄNGLIGHET","Steam Accessibility Review","En granskning av Steams digitala gränssnitt med fokus på tillgänglighet. Vi identifierade hinder som kan göra det svårare för användare att hitta information och navigera på plattformen.",["Tillgänglighet","UI-granskning","WCAG"]]};
+const dialog=document.querySelector("#project-dialog"),close=document.querySelector(".dialog-close"),title=document.querySelector("#dialog-title"),kicker=document.querySelector("#dialog-kicker"),desc=document.querySelector("#dialog-description"),tags=document.querySelector("#dialog-tags");let last;
+document.querySelectorAll(".project-trigger").forEach(trigger=>trigger.addEventListener("click",()=>{const p=data[trigger.dataset.project];if(!p||!dialog)return;last=trigger;kicker.textContent=p[0];title.textContent=p[1];desc.textContent=p[2];tags.replaceChildren(...p[3].map(t=>{const s=document.createElement("span");s.textContent=t;return s}));dialog.showModal();close.focus()}));
+close.addEventListener("click",()=>dialog.close());dialog.addEventListener("click",e=>{if(e.target===dialog)dialog.close()});dialog.addEventListener("close",()=>last&&last.focus());
+})();
