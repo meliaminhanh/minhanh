@@ -1,0 +1,1 @@
+Replace index.html and style.css in the repository root. Keep script.js. Upload the complete assets folder to the repository root.
